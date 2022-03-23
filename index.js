@@ -48,6 +48,16 @@ app.post("/users", (req, res) => {
 // FILMS ENDPOINTS
 
 app.get("/films", (req, res) => {
+  let films
+  if(req.query.director) {
+    films = data.films.filter(film => film.director === req.query.director)
+  }
+  if(req.query.genre) {
+    films = data.films.filter(film => film.genre === req.query.genre)
+  }
+  if(req.query.director && req.query.genre) {
+    films = data.films.filter(film => film.director && film.genre === req.query.director && req.query.genre)
+  }
   res.json({ films: data.films });
 });
 
